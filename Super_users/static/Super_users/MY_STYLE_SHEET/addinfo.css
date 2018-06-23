@@ -1,0 +1,35 @@
+* {
+    direction: rtl;
+    text-align: right;
+}
+.under_line
+{
+     border-style: solid;
+     border-width: 0px 0px 2px 0px;
+     padding-top: 4px;
+}
+.text_alignment{
+    alignment: right;
+    text-align: right;
+}
+.my_footer
+{
+    height: 50px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    font-size : smaller;
+    font-weight: bolder;
+}
+.txt_in_footer
+{
+    color:white;
+    text-align: center;
+    padding-top: 10px;
+}
+body{
+    background-color: black;
+}

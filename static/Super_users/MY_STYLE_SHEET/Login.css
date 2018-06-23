@@ -1,0 +1,44 @@
+ html body {
+        height: 100%;
+    }
+
+    body {
+        background-image: url("https://www.expatincroatia.com/wp-content/uploads/2013/09/how-to-find-a-doctor-in-croatia-1024x679.jpg");
+        width: 100%;
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-repeat: no-repeat;
+        background-size: cover;
+        direction: rtl
+    }
+
+    .tbl_property {
+        background-color: white;
+        width: 40%;
+        height: 40%;
+        margin: auto;
+        padding: 30%;
+    }
+
+    .panel_login {
+        width: 50%;
+
+        margin: auto;
+    }
+
+    .header {
+        font-weight: bolder;
+        font-size: large;
+        margin-right: auto;
+        padding-right: 35%;
+    }
+
+    .btn_login {
+        width: 40%;
+    }
+
+    .pan_footer {
+        background-color: #ececec;
+        font-size: small;
+        font-weight: bolder;
+    }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  	  html body{
+	  	  height: 100%;
+  	  }
+	  .body
+	  {
+		  background-image: url("https://www.expatincroatia.com/wp-content/uploads/2013/09/how-to-find-a-doctor-in-croatia-1024x679.jpg");
+		  width: 100%;
+		  height: 100%;
+    /* Center and scale the image nicely */
+   		background-repeat: no-repeat;
+	    background-size: cover;
+		  direction: rtl
+	  }
+	  .tbl_property
+	  {
+		  background-color: white;
+		  width : 40%;
+		  height : 40%;
+		  margin: auto;
+		  padding: 30%;
+	  }
+	  .panel_login
+	  {
+	  	  width: 50%;
+	  	  
+		  margin: auto;
+	  }
+	  .header
+	  {
+		  font-weight: bolder;
+		  font-size: large;
+		  margin-right: auto;
+		  padding-right: 35%;
+	  }
+	  .btn_login
+	  {
+		  width:40%;
+	  }
+	  .pan_footer
+	  {
+		  background-color: #ececec;
+		  font-size: small;
+		  font-weight: bolder;
+	  }
+   </style>
+</head>
+<body class="body">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">نام سایت</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+	      <li><a href="#">ثبت نام</a></li>
+	      <li><a href="#">درباره ما</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	<div class = "container">
+		<div class="panel panel-deafault panel_login">
+			<div class="panel-heading bg-primary">
+				<p class=header>سامانه احراز هویت</p>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="usr">نام کاربری</label>
+					<input type="text" class="form-control" id="txt_usr"/>
+				</div>
+				<div class="form-group">
+					<label for="pwd">رمزعبور</label>
+					<input type="password" class="form-control" id="txt_pwd">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" class="form-control btn_login">ورود</button>
+				</div>
+			</div>
+			<div class=pan_footer>
+				<div class="panel-footer">
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a href="#">فراموشی رمز عبور</a></li>
+					    <li class="breadcrumb-item"><a href="#">تغییر رمز عبور</a></li>
+					    <li class="breadcrumb-item"><a href="#">ایجاد حساب کاربری جدید</a></li>
+					  </ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

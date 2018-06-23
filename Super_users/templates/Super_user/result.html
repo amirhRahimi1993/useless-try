@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Activity</title>
+    <meta charset="UTF-8">
+    <title>وارد کردن اطلاعات</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            direction: rtl;
+        }
+
+        .Adjust_width {
+            width: 40%;
+        }
+
+    </style>
+</head>
+<body>
+
+{% load staticfiles %}
+{% load static %}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'Super_users:Super_Usr_Home' %}">خانه</a></li>
+            <li><a href="#">درباره ما</a></li>
+            <li><a href="{% url 'Super_users:Report_activity' %}">گزارش فعالیت ها من</a></li>
+            <li><a href="{% url 'Super_users:AdvanceSearch' %}">جستجوی پیشرفته</a></li>
+            <li><a href="{% url 'Super_users:Login' %}">ورود</a></li>
+            <li><a href="{% url 'Super_users:Logout' %}">خروج</a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="نام پزشک">
+                <input type="text" class="form-control" placeholder="فامیل پزشک">
+            </div>
+            <button type="submit" class="btn btn-success">بگرد</button>
+        </form>
+    </div>
+</nav>
+
+
+<!--/.Navbar-->
+
+<div class="container" id="div_scroll_bar">
+    {% if empty == "True" %}
+        <h3>متاسفانه جستجوی شما نتیجه ای در بر نداشت</h3>
+    {% else %}
+        {% for i in filters %}
+            <form id="frm_Login" method="post" class="Adjust_width">
+
+                {% csrf_token %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {#                        <img src="{{ filters.Dr_photo_link }}" class="img img-thumbnail">#}
+                        <img src="{% static 'Super_users/Picture/Profile/People-Doctor-Male-icon.png' %}"/>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="Dr_name">نام پزشک</label>
+                            <input type="text" class="form-control" id="txt_name" name="txt_name" value="{{ i.Dr_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="Dr_family">فامیل پزشک</label>
+                            <input type="text" class="form-control" id="txt_family" name="txt_family" value="{{ i.Dr_family }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="speciality">تخصص پزشک</label>
+                            <input type="text" class="form-control" id="txt_speciality" name="txt_special" value="{{ i.Dr_specialty }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">تلفن پزشک</label>
+                            <input type="text" class="form-control" id="txt_telephone" name="txt_tel"
+                                   value="{{ i.Dr_telephone }}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile_phone">موبایل</label>
+                            <input type="text" class="form-control" id="txt_mobile" name="txt_tel"
+                                   value="{{ i.Dr_telephone }}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Address">لینک گوگل مپ</label>
+                            <textarea rows="6" cols="50" class="form-control" id="txt_gmap"
+                                      name="txt_gmap">{{ i.Dr_google_map_link }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">آدرس پزشک</label>
+                            <textarea rows="6" cols="50" class="form-control" id="txt_address"
+                                      name="txt_address">{{ i.Dr_Address }}</textarea>
+                        </div>
+                        <input type="text" id='get_field_id' hidden="hidden" value="{{ i.pk }}" />
+
+                        {% if i.adder.Email == viewer_email %}
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-success" class="form-control btn_login"
+                                        value="checkOut" id="btn_Update" name="btn_Update">به روز رسانی اطلاعات
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer"><label class="text-danger">توجه: تا وقتی که دکمه به روز رسانی اطلاعات یا
+                        حذف اطلاعات رو نزنید تغییرات اعمال نخواهند شد</label></div>
+                </div>
+            </form>
+        {% endfor %}
+        </div>
+    {% endif %}
+<script>
+        var scrol_page = 0;
+    $("#btn_Update").click(function () {
+        event.preventDefault()
+        var dr_name = $('#txt_name').val();
+        var dr_family = $('#txt_family').val();
+        var dr_address = $('#txt_address').val();
+        var dr_gmap = $('#txt_gmap').val();
+        var dr_mbl = $('#txt_mobile').val();
+        var dr_tel = $('#txt_telephone').val();
+        var dr_speciality = $('#txt_speciality').val();
+        var dr_id = $('#get_field_id').text();
+        $.ajax({
+            url: '/ajax/Update_dr/',
+            data: {
+                'dr_name': dr_name,
+                'dr_family': dr_family,
+                'dr_address': dr_address,
+                'dr_gmap': dr_gmap,
+                'dr_mbl': dr_mbl,
+                'dr_tel': dr_tel,
+                'dr_speciality': dr_speciality,
+                'id': dr_id
+
+            },
+            dataType: 'json',
+            success: function (data) {
+                alert(data.is_taken)
+
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

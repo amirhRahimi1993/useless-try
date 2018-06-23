@@ -1,0 +1,12 @@
+* {
+    direction: rtl;
+}
+
+.Adjust_width {
+    width: 40%;
+}
+
+.photo_adjust {
+    width: 25%;
+    height: 70px;
+}

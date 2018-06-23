@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load staticfiles %}
+<form action="" method="post" id="file-upload-form" enctype="multipart/form-data"> {% csrf_token %}
+
+    <input type="file" id="file_upload" name="File">
+    <input type="text" id="txt1" name="text1">
+    <input type="text" id="txt2" name="text2">
+    <input type="text" id="txt3" name="text3">
+    <input type="text" id="txt4" name="text4">
+
+    <button type="submit" class="btn btn-primary" id='upload-btn'>Upload</button>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function upload(event) {
+        event.preventDefault();
+        var data = new FormData($('form').get(0));
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert('success');
+            }
+        });
+        return false;
+    }
+
+    $(function () {
+        $('form').submit(upload);
+    });
+</script>
+</body>
+</html>

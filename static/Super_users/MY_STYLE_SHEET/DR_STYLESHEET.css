@@ -1,0 +1,21 @@
+body{
+    direction: rtl;
+}
+.card_size
+{
+    width: 25%;
+}
+.card_header
+{
+    direction: rtl !important;
+    padding-right: 2px;
+    text-align: right;
+}
+.card_content
+{
+    text-align: right;
+}
+.btn_alignment
+{
+    alignment: left;
+}
