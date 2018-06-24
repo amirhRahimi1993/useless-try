@@ -11,27 +11,36 @@ class GeneratorCapcha:
         Algo = "ALGODRILL@)!*"
         capcha_value = ""
         for i in range(9000,10000):
-            capcha_value = ""
             capcha_value = str(i)
-            capcha_name = ""
-            JPG_name = ""
-            name = ""
-            while True:
-                name = random.randint(1000000 , 100000000000)
-                try :
-                    JPG_name = Hash_capcha.objects.get(Number_name= str(name))
-                except:
-                    break
             m = hashlib.md5()
             m.update((capcha_value + Algo).encode('utf-8'))
             digest_capcha = m.digest()
+            allowed_char ="asdfghjklpoiuytrewqzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM"
+            allowed_char = list(allowed_char)
+            name = list(str(digest_capcha))
+            for i in range(len(name)):
+                if len(str(name[i])) > 1:
+                    name[i] = "D"
+                    continue
+                Change = True
+                for index_ac in range(len(allowed_char)):
+                    if name[i] == allowed_char[index_ac]:
+                        Change=False
+                        break
+                if Change:
+                    try:
+                        name[i] = str(ord(name[i]))
+                    except:
+                        print("Here!")
+
+            name = ''.join(name)
             if self.CREATE_IMAGE:
                 I = cv2.imread("/Users/amirhosseinrahimi/Documents/Django_projects/DR_info/static/Super_users/Picture/capcha/capcha_background.jpg")
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 I = cv2.putText(I, capcha_value, (100, 100), font, 2, (190, 50, 50), 2, cv2.LINE_AA)
-            cv2.imwrite("/Users/amirhosseinrahimi/Documents/Django_projects/DR_info/static/Super_users/Picture/capcha_create/"+str(name)+".jpg", I)
+                cv2.imwrite("/Users/amirhosseinrahimi/Documents/Django_projects/DR_info/static/Super_users/Picture/capcha_create/"+name+".jpg", I)
             try:
-                x= Hash_capcha(Hash_value=digest_capcha, Number=capcha_value , Number_name=str(name) + ".jpg")
+                x= Hash_capcha(Hash_value=digest_capcha, Number=capcha_value , Number_name=name + ".jpg")
                 x.save()
             except:
                 continue

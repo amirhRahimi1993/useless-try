@@ -67,7 +67,7 @@ def index(request):
         generate = Generator(30)
         generate.main()
     if len(Hash_capcha.objects.all()) == 0:
-        x = GeneratorCapcha(CREATE_IMAGE=False)
+        x = GeneratorCapcha(CREATE_IMAGE=True)
         x.main()
     if len(specialiy.objects.all()) == 0:
         z = adder()
